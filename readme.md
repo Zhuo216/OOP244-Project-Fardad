@@ -1,4 +1,4 @@
-# Project: Disaster and Emergency Aid Management
+# Project: Disaster and Emergency Aid Management (DEAM)
 ## Current project state
  - Milestones 1 released  
 
@@ -124,7 +124,7 @@ Final Project Milestone ?
 Module: Whatever
 Filename: Whatever.cpp
 Version 1.0
-Author	John Doe
+Author   John Doe
 Revision History
 -----------------------------------------------------------
 Date      Reason
@@ -239,7 +239,7 @@ If the prompt is not null, it will display it. Then it performs a foolproof entr
 #### int Utils::getint(int min, int max, const char* prompt=nullptr, const char* errMes=nullptr);
 If the prompt is not null it will be displayed before getting a valid integer.(reuse the previous getint()) <br />
 If the entered integer is not within the acceptable range (min and max) then an error message is displayed and it will not let the user leave the function until an acceptable value is entered.
-When printing the error message, if the errMes argument is not null it will be displayed followed by `", retry: "` otherwise the general error message `"Value out of range [min<val<max]: "` is displayed (replacing min and max with their values)
+When printing the error message, if the errMes argument is not null it will be displayed followed by `", retry: "` otherwise the general error message `"Value out of range [min<=val<=max]: "` is displayed (replacing min and max with their values)
 
 
 > Note: Implementation of the above functions are optional. You can use your own way to implement the requirements of the application if you like.<br />As we advance through the implementation of the project, more suggestions for Utils function may follow 
@@ -250,7 +250,7 @@ When printing the error message, if the errMes argument is not null it will be d
 A class to keep track of the state of an object by holding the description of the state and an optional status code. 
 For example `Error desc: "Invalid Range", Error code: 101 ` 
 
-### Date Class	
+### Date Class 
 A class that encapsulates year, month and day values for date stamping, validation, comparison and date IO purposes. 
 
 ## The Status class
