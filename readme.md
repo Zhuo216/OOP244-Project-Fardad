@@ -1,4 +1,4 @@
-# Project: Disaster and Emergency Aid Management (DEAM)
+# Project: Disaster and Emergency Aid Management 
 ## Current project state
  - Milestones 1 and 2 released  
 
@@ -21,8 +21,8 @@ Overview and Q&A sessions will be held on **Mondays at 10 AM** This is open to a
 
 |Milestone| Revision |  Overview<br />session |Comments |
 |------|:---:|:---:|:----|
-| [MS1](#milestone-1) | V1.0 | [Join Overview Session (March 7th)]() ||
-| [MS2](#milestone-2) | V1.0 | [Join Overview Session (March 7th)]() ||
+| [MS1](#milestone-1) | V1.0 | [Join the Overview Session (March 7th, 10AM)]() ||
+| [MS2](#milestone-2) | V1.0 | [Join the Overview Session (March 7th, 10AM)]() ||
 
 
 
