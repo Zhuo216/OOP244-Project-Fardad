@@ -21,8 +21,8 @@ Overview and Q&A sessions will be held on **Mondays at 10 AM** This is open to a
 
 |Milestone| Revision |  Overview<br />session |Comments |
 |------|:---:|:---:|:----|
-| [MS1](#milestone-1) | V1.0 | [Join the Overview Session (March 7th, 10AM)]() ||
-| [MS2](#milestone-2) | V1.0 | [Join the Overview Session (March 7th, 10AM)]() ||
+| [MS1](#milestone-1) | V1.0 | [Join the Overview Session (March 7th, 10AM)](https://connect.rna2.blindsidenetworks.com/invite/to?c=6AaPdzkNRoAapCAVgig05HlVRBrLVzOMtgraStg2RQY&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1646664992101&u=senecacollege) ||
+| [MS2](#milestone-2) | V1.0 | [Join the Overview Session (March 7th, 10AM)](https://connect.rna2.blindsidenetworks.com/invite/to?c=6AaPdzkNRoAapCAVgig05HlVRBrLVzOMtgraStg2RQY&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1646664992101&u=senecacollege) ||
 
 
 
