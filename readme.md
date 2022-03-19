@@ -1,6 +1,6 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - Milestones 3 (V0.9) released
+ - Milestones 3 (V1.0) released
 
 ## Use case
 
@@ -24,6 +24,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 | [MS1](#milestone-1) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/ZW09NrkUSzA) ||
 | [MS2](#milestone-2) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/1qxhpcRfE8Q) ||
 | [MS3](#milestone-3) | V0.9 | [Overview TBA]() | The tester program will be released shortly|
+|  | V1.0 | |  Teseter program added |
 
 
 
@@ -1303,10 +1304,203 @@ If the istream fails during reading, the state is set to `"Console entry failed!
 The istream reference is returned in the end.
 
 ### Tester program
-TBA
+```C++
+/* ------------------------------------------------------
+Final project Milestone 3
+Module: iProduct and Item
+Filename: main.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-03-19
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "iProduct.h"
+#include "Item.h"
+using namespace std;
+using namespace sdds;
+void resetToOriginal();
+void entryAndSave();
+void descriptive();
+void linear();
+int main() {
+   resetToOriginal();
+   entryAndSave();
+   cout << "------------------------" << endl;
+   descriptive();
+   cout << "------------------------" << endl;
+   linear();
+   cout << "------------------------" << endl;
+   return 0;
+}
+void resetToOriginal() {
+   ifstream in("dataOriginal.dat");
+   ofstream out("data.dat");
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+void entryAndSave() {
+   ofstream file("data.dat", ios::app);
+   iProduct* p = new Item;
+   cout << "Enter the following values: " << endl
+      << 
+      "abc\n"
+      "1111\n"
+      "44444\n"
+      "Blanket\n"
+      "abc\n"
+      "222222\n"
+      "22\n"
+      "abc\n"
+      "222\n"
+      "2\n"
+      "abc\n"
+      "22222222\n"
+      "22.22\n" << "------------------------" << endl;
+   p->readSku(cin);
+   cin >> *p;
+   cout << "------------------------" << endl;
+   cout << *p;
+   cout << "------------------------" << endl;
+   p->linear(true);
+   cout << *p << endl;
+   p->save(file) << endl;
+   file.flush();
+   file.close();
+   delete p;
+}
+void descriptive() {
+   ifstream file("data.dat");
+   iProduct* p;
+   p = new Item;
+   while (p->load(file)) {
+      cout << *p << endl;
+   }
+   delete p;
+}
+void linear() {
+   ifstream file("data.dat");
+   iProduct* p;
+   p = new Item;
+   while (p->load(file)) {
+      if (*p == 44444) {
+         p->linear(true);
+         (*p) += 10;
+         cout << "------------------------" << endl;
+         cout << *p << endl;
+         cout << "Need: " << p->qtyNeeded() << endl;
+         cout << "Have: " << p->qty() << endl;
+         cout.setf(ios::fixed);
+         cout.precision(2);
+         cout << "Price: " << double(*p) << endl;
+      }
+      if (*p == "kets") {
+         p->linear(true);
+         (*p) -= 5;
+         cout << "------------------------" << endl;
+         cout << *p << endl;
+         cout << "Need: " << p->qtyNeeded() << endl;
+         cout << "Have: " << p->qty() << endl;
+         cout << "This object is in a " << (bool(*p)?"good":"bad") << " state!" << endl;
+      }
+   }
+   delete p;
+}
+
+
+```
 
 ### Tester program output
-TBA
+```text
+Enter the following values:
+abc
+1111
+44444
+Blanket
+abc
+222222
+22
+abc
+222
+2
+abc
+22222222
+22.22
+------------------------
+SKU: abc
+Invalid Integer, retry: 1111
+Value out of range [40000<=val<=99999]: 44444
+AMA Item:
+SKU: 44444
+Description: Blanket
+Quantity Needed: abc
+Invalid Integer, retry: 222222
+Value out of range [1<=val<=9999]: 22
+Quantity On Hand: abc
+Invalid Integer, retry: 222
+Value out of range [0<=val<=22]: 2
+Unit Price: $abc
+Invalid number, retry: 22222222
+Value out of range [0.00<=val<=9999.00]: 22.22
+------------------------
+AMA Item:
+44444: Blanket
+Quantity Needed: 22
+Quantity Available: 2
+Unit Price: $22.22
+Needed Purchase Fund: $444.40
+------------------------
+44444 | Blanket                             |    2 |   22 |   22.22 |
+------------------------
+AMA Item:
+45678: Sleeping Bags
+Quantity Needed: 200
+Quantity Available: 100
+Unit Price: $65.66
+Needed Purchase Fund: $6566.00
+
+AMA Item:
+56789: Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows
+Quantity Needed: 2000
+Quantity Available: 134
+Unit Price: $165.99
+Needed Purchase Fund: $309737.34
+
+AMA Item:
+44444: Flash lights
+Quantity Needed: 400
+Quantity Available: 0
+Unit Price: $5.99
+Needed Purchase Fund: $2396.00
+
+AMA Item:
+44444: Blanket
+Quantity Needed: 22
+Quantity Available: 2
+Unit Price: $22.22
+Needed Purchase Fund: $444.40
+
+------------------------
+------------------------
+56789 | Tents and Blankets and pillows Tent |  129 | 2000 |  165.99 |
+Need: 2000
+Have: 129
+This object is in a good state!
+------------------------
+44444 | Flash lights                        |   10 |  400 |    5.99 |
+Need: 400
+Have: 10
+Price: 5.99
+------------------------
+44444 | Blanket                             |   12 |   22 |   22.22 |
+Need: 22
+Have: 12
+Price: 22.22
+------------------------
+
+```
 
 ### Files to submit
 ```text
