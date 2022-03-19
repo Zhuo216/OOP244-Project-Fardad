@@ -57,7 +57,7 @@ This project will be done in 5 milestones and each milestone will have its due d
 | m53  | Menu item 3 | Optional with 10% penalty |
 | m54  | Menu item 4 | Optional with 10% penalty |
 | m55  | Menu item 5 | Optional with 10% penalty |
-| m56  | Menu item 9 | Optional with 10% penalty |
+| m56  | Menu item 6 | Optional with 10% penalty |
 
 > The first 4 milestones will not be marked based on the code but on their output and their timely submissions. You may modify or debug your previous code as you are going through the milestones. The only milestone that is going to be scrutinized based on the code will be milestone 5. If you require any feedback on your first four milestones you need to ask your professor to do so.
 
