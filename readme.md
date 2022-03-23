@@ -24,8 +24,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |------|:---:|:---:|:----|
 | [MS1](#milestone-1) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/ZW09NrkUSzA) ||
 | [MS2](#milestone-2) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/1qxhpcRfE8Q) ||
-| [MS3](#milestone-3) | V0.9 | [Join overview session at 9:50 on Wed Mar 23](https://connect.rna2.blindsidenetworks.com/invite/to?c=CyuIKZTfa6AL7y68u3keYfaorWVFBLcPQsd5bLC1SRk&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1648042063129&u=senecacollege
-) | The tester program will be released shortly|
+| [MS3](#milestone-3) | V0.9 | [Join overview session at 9:50 on Wed Mar 23](https://connect.rna2.blindsidenetworks.com/invite/to?c=CyuIKZTfa6AL7y68u3keYfaorWVFBLcPQsd5bLC1SRk&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1648042063129&u=senecacollege) | The tester program will be released shortly|
 |  | V1.0 | |  Teseter program added |
 
 
