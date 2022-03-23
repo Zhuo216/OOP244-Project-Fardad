@@ -2,11 +2,12 @@
 Final project Milestone 3
 Module: iProductTester.cpp
 Filename: main.cpp
-Version 1.0
+Version 1.1
 Author: Fardad Soleimanloo   2022-03-03
 Revision History
 -----------------------------------------------------------
 Date          Reason
+Mar 23        97: delete[] was wrong changed to delete
 -----------------------------------------------------------*/
 #include <iostream>
 #include <fstream>
@@ -93,6 +94,6 @@ int main() {
    P->save(out);
    cout << *P;
    cin >> *P;
-   delete[] P;
+   delete P;
    return 0;
 }
