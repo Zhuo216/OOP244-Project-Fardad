@@ -26,6 +26,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 | [MS2](#milestone-2) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/1qxhpcRfE8Q) ||
 | [MS3](#milestone-3) | V0.9 | [Watch the overview Session (March 23rd, 10AM)](https://youtu.be/Cfq2J7SwH5c) | The tester program will be released shortly|
 |  | V1.0 | |  Teseter program added |
+| [MS4](#milestone-4) | V1.0 | [Join the Overview (Monday March 17th at 10AM)]() ||
 
 
 
@@ -128,7 +129,7 @@ Final Project Milestone ?
 Module: Whatever
 Filename: Whatever.cpp
 Version 1.0
-Author	John Doe
+Author   John Doe
 Revision History
 -----------------------------------------------------------
 Date      Reason
@@ -254,7 +255,7 @@ When printing the error message, if the errMes argument is not null it will be d
 A class to keep track of the state of an object by holding the description of the state and an optional status code. 
 For example `Error desc: "Invalid Range", Error code: 101 ` 
 
-### Date Class	
+### Date Class 
 A class that encapsulates year, month and day values for date stamping, validation, comparison and date IO purposes. 
 
 ## The Status class
@@ -1017,7 +1018,7 @@ int qtyNeeded()const;
 int qty()const;
 // determines if the iProduct is displayed in a linear format or 
 // descriptive format
-void Linear(bool isLinear);
+void linear(bool isLinear);
 // saves the iProduct into a file
 std::ofstream& save(std::ofstream& ofstr)const;
 // loads an iProduct from a file
@@ -1032,7 +1033,7 @@ bool operator==(int sku)const;
 bool operator==(const char* description)const;
 
 ```
-Also, set up the destructor of the iProduct to make sure the dynamic descendants of the iProduct interface will not have a memory leak if when going out of scope.
+Also, set up the destructor of the iProduct to make sure the dynamic descendants of the iProduct interface will not have a memory leak if or when going out of scope.
 
 ### Insertion and extraction operator overloads.
 Overload the Insertion and extraction operators for istream and ostream to call the display and the read methods of the iProduct.
@@ -1102,7 +1103,7 @@ public:
       cout << "qty" << endl;
       return 0;
    }
-   void Linear(bool isLinear) {
+   void linear(bool isLinear) {
       cout << "Linear" << endl;
    }
    std::ofstream& save(std::ofstream& ofstr)const {
@@ -1151,7 +1152,7 @@ int main() {
    P->save(out);
    cout << *P;
    cin >> *P;
-   delete[] P;
+   delete P;
    return 0;
 }
 ```
@@ -1513,6 +1514,378 @@ iProduct.h
 iProduct.cpp
 Item.h
 Item.cpp
+main.cpp
+```
+
+Upload your source codes and the tester program to your `matrix` account. Compile and run your code using the `g++` compiler [as shown in the introduction](#compiling-and-testing-your-program) and make sure that everything works properly.
+
+Then, run the following command from your account (replace `profname.proflastname` with your professor’s Seneca userid):
+```
+~profname.proflastname/submit 2??/prj/mX
+```
+and follow the instructions.
+
+- *2??* is replaced with your subject code
+- *X* is replaced with milestone number
+
+### The submitter program's options:
+```bash
+~prof_name.prof_lastname/submit DeliverableName [-submission options]<ENTER>
+[-submission option] acceptable values:
+  "-due":
+       Shows due dates only
+       This option cannot be used in combination with any other option.
+  "-skip_spaces":
+       Do the submission regardless of incorrect horizontal spacing.
+       This option may attract penalty.
+  "-skip_blank_lines":
+       Do the submission regardless of incorrect vertical spacing.
+       This option may attract penalty.
+  "-feedback":
+       Check the program execution without submission.
+```
+
+## [Back to milestones](#milestones)
+
+# Milestone 4
+## The Perishable Class
+Inherit a class from the Item class called Perishable. 
+
+A Perishable item, unlike an Item, has an SKU that starts with digits 1 to 3.  (10000 to 39999)
+
+### Attributes
+#### The Expiry Date
+The Perishable class adds an expiry date to the Item.
+
+#### The Handling Instructions
+Dynamically holds a text for the instructions with which the perishable item should be handled.
+
+### Construction
+A Perishable object is created using the default constructor that creates an empty perishable item.
+
+### Rule of three
+Implement the rule of three so a Perishable Item can be copied or assigned to another perishable item.
+
+### Query
+Create a constant query that returns a constant reference of the expiry date.
+
+### Virtual overrides
+#### readSKU override
+Override readSKU function to only receive SKU numbers between 10000 and 39999 (only SKUs starting with digits 1 to 3)
+
+#### save override
+If the Perishable item is in a good state
+- it will call the save of the Base class.
+- writes a tab
+- writes the handling instructions, if handling instructions exist and the attribute is not empty.
+- writes a tab
+- writes an unformatted copy of the expiry date
+
+#### load override
+- calls the load of the Base class.
+- reads the handling instructions dynamically into the handling instructions attribute
+- ignores the tab
+- reads the expiry date
+- ignores the newline.
+- if the ifstream object has failed, it will set the state of the Item to `"Input file stream read (perishable) failed!"`
+
+#### display override
+- if the Perishable Item is in a bad state, the state is printed
+- otherwise if linear
+   - display of the base class is called
+   - if handling instructions are not null and not empty a single asterisk ('*') is printed otherwise a single space (' ') is printed.
+   - the expiry date is printed
+- if not linear
+   - prints `"Perishable "`
+   - displays the base class
+   - prints `"Expiry date: "` 
+   - printed the expiry date (formatted)
+   - if handling instructions attribute is not null and is not empty `"Handling Instructions: "` and the content of the instructions are printed
+   - new line is printed.
+   
+##### Examples
+###### Linear without handling instructions
+```text
+ 12345 | Baby Formula                        |  140 |  200 |   33.99 | 2022/12/12
+```
+
+###### Linear with handling instructions
+```text
+ 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+```
+
+###### detailed without handling instructions
+```text
+Perishable AMA Item:
+12345: Baby Formula
+Quantity Needed: 200
+Quantity Available: 140
+Unit Price: $33.99
+Needed Purchase Fund: $2039.40
+Expiry date: 2022/12/12
+
+```
+
+###### detailed with handling instructions
+```text
+Perishable AMA Item:
+12113: Hydrogen peroxide 100ml bottles
+Quantity Needed: 300
+Quantity Available: 275
+Unit Price: $3.99
+Needed Purchase Fund: $99.75
+Expiry date: 2023/11/11
+Handling Instructions: Keep away from direct sunlight
+
+```
+
+#### read override
+- read of the base class is called
+- the handling instructions memory is deleted and the attribute is set to null
+- prompts: `"Expiry date (YYMMDD): "`
+- the expiry date is read
+- newline is ignored
+- prompts: `"Handling Instructions, ENTER to skip: "`
+- peeks and if the very first character is not `'\n'` it will read the instructions dynamically into the instructions attribute. otherwise, nothing is read and the attribute remains null.
+- if istream object is in a fail state, it will set the state of the Perishable Item to `"Perishable console date entry failed!"`.
+
+### Tester Program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 4
+Module: Perishable
+Filename: main.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-03-27
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "iProduct.h"
+#include "Perishable.h"
+using namespace std;
+using namespace sdds;
+void resetToOriginal();
+void entryAndSave();
+void descriptive();
+int main() {
+   resetToOriginal();
+   entryAndSave();
+   cout << "------------------------" << endl;
+   descriptive();
+   return 0;
+}
+void resetToOriginal() {
+   ifstream in("dataOriginal.dat");
+   ofstream out("data.dat");
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+void entryAndSave() {
+   ofstream file("data.dat", ios::app);
+   iProduct* p = new Perishable;
+   cout << "Enter the following values: " << endl
+      << 
+      "4444\n"
+      "44444\n"
+      "11111\n"
+      "Advil Extra Strength Caplets\n"
+      "22\n"
+      "2\n"
+      "22.22\n"
+      "221212\n"
+      "<ENTER>\n"<< "------------------------" << endl;
+   p->readSku(cin);
+   cin >> *p;
+   cout << "------------------------" << endl;
+   cout << *p;
+   cout << "------------------------" << endl;
+   p->linear(true);
+   cout << *p << endl;
+   p->save(file) << endl;
+   cout << "Enter the following values: " << endl
+      <<
+      "22222\n"
+      "Advil\n"
+      "33\n"
+      "3\n"
+      "33.33\n"
+      "221212\n"
+      "Keep in room temperature\n" << "------------------------" << endl;
+   p->readSku(cin);
+   cin >> *p ;
+   cout << "------------------------" << endl;
+   p->linear(false);
+   cout << *p << endl;
+   cout << "------------------------" << endl;
+   p->linear(true);
+   cout << *p << endl;
+   p->save(file) << endl;
+   file.flush();
+   file.close();
+   delete p;
+}
+void descriptive() {
+   ifstream file("data.dat");
+   Perishable p;
+   while (p.load(file)) {
+      cout << p << endl;
+      cout << "----------------------------------\nExpiry date: " << p.expiry() << "\n----------------------------------\n";
+   }
+}
+
+```
+### Tester output
+```text
+Enter the following values: 
+4444
+44444
+11111
+Advil Extra Strength Caplets
+22
+2
+22.22
+221212
+<ENTER>
+------------------------
+SKU: 4444
+Value out of range [10000<=val<=39999]: 44444
+Value out of range [10000<=val<=39999]: 11111
+AMA Item:
+SKU: 11111
+Description: Advil Extra Strength Caplets
+Quantity Needed: 22
+Quantity On Hand: 2
+Unit Price: $22.22
+Expiry date (YYMMDD): 221212
+Handling Instructions, ENTER to skip: 
+------------------------
+Perishable AMA Item:
+11111: Advil Extra Strength Caplets
+Quantity Needed: 22
+Quantity Available: 2
+Unit Price: $22.22
+Needed Purchase Fund: $444.40
+Expiry date: 2022/12/12
+------------------------
+11111 | Advil Extra Strength Caplets        |    2 |   22 |   22.22 | 2022/12/12
+Enter the following values: 
+22222
+Advil
+33
+3
+33.33
+221212
+Keep in room temperature
+------------------------
+SKU: 22222
+AMA Item:
+SKU: 22222
+Description: Advil
+Quantity Needed: 33
+Quantity On Hand: 3
+Unit Price: $33.33
+Expiry date (YYMMDD): 221212
+Handling Instructions, ENTER to skip: Keep in room temperature
+------------------------
+Perishable AMA Item:
+22222: Advil
+Quantity Needed: 33
+Quantity Available: 3
+Unit Price: $33.33
+Needed Purchase Fund: $999.90
+Expiry date: 2022/12/12
+Handling Instructions: Keep in room temperature
+
+------------------------
+22222 | Advil                               |    3 |   33 |   33.33 |*2022/12/12
+------------------------
+Perishable AMA Item:
+12113: Hydrogen peroxide 100ml bottles
+Quantity Needed: 300
+Quantity Available: 275
+Unit Price: $3.99
+Needed Purchase Fund: $99.75
+Expiry date: 2023/11/11
+Handling Instructions: Keep away from direct sunlight
+
+----------------------------------
+Expiry date: 2023/11/11
+----------------------------------
+Perishable AMA Item:
+12345: Baby Formula
+Quantity Needed: 200
+Quantity Available: 140
+Unit Price: $33.99
+Needed Purchase Fund: $2039.40
+Expiry date: 2022/12/12
+
+----------------------------------
+Expiry date: 2022/12/12
+----------------------------------
+Perishable AMA Item:
+12345: TYLENOL Extra Strength For Fast Pain Relief (100 tablets bottle)
+Quantity Needed: 200
+Quantity Available: 40
+Unit Price: $11.99
+Needed Purchase Fund: $1918.40
+Expiry date: 2024/10/22
+
+----------------------------------
+Expiry date: 2024/10/22
+----------------------------------
+Perishable AMA Item:
+11223: Enfamil A+
+Quantity Needed: 38
+Quantity Available: 3
+Unit Price: $38.99
+Needed Purchase Fund: $1364.65
+Expiry date: 2022/11/11
+Handling Instructions: Keep in a dry and cool place
+
+----------------------------------
+Expiry date: 2022/11/11
+----------------------------------
+Perishable AMA Item:
+11111: Advil Extra Strength Caplets
+Quantity Needed: 22
+Quantity Available: 2
+Unit Price: $22.22
+Needed Purchase Fund: $444.40
+Expiry date: 2022/12/12
+
+----------------------------------
+Expiry date: 2022/12/12
+----------------------------------
+Perishable AMA Item:
+22222: Advil
+Quantity Needed: 33
+Quantity Available: 3
+Unit Price: $33.33
+Needed Purchase Fund: $999.90
+Expiry date: 2022/12/12
+Handling Instructions: Keep in room temperature
+
+----------------------------------
+Expiry date: 2022/12/12
+----------------------------------
+```
+### Files to submit
+```text
+Utils.cpp
+Utils.h
+Status.cpp
+Status.h
+iProduct.h
+iProduct.cpp
+Item.h
+Item.cpp
+Perishable.cpp
+Perishable.h
+Date.cpp
+Date.h
 main.cpp
 ```
 
