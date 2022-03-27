@@ -41,7 +41,7 @@ This project will be done in 5 milestones and each milestone will have its due d
 | MS1 | 10% | Mar 13 | gets full mark even if 1 week late. gets 0% afterwards|
 | MS2 | 10% | Mar 17 | gets full mark even if 1 week late. gets 0% afterwards|
 | MS3 | 10% | Mar 28 | gets full mark even if 1 week late. gets 0% afterwards|
-| MS4 | 10% | Mar 30 | gets full mark even if 1 week late. gets 0% afterwards|
+| MS4 | 10% | Mar 31 | gets full mark even if 1 week late. gets 0% afterwards|
 | MS5 | 60% | See below| See below|
 
 > To make the final submission of the project easier and to make it possible to partially submit a project we have divided the submission of milestone 5 into six small ones. Each submission is worth 10% of the project mark. Your project will be marked only if you have all four milestones and at least have one of the 6 six submissions of milestone 5. 
