@@ -1,7 +1,6 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - Milestone 3 (V1.0) released
- - Milestone 3 overview session on Wed March 23rd at 9:50 
+ - Milestone 4 (V1.0) released
 
 ## Use case
 
