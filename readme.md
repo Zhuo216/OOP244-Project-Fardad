@@ -25,7 +25,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 | [MS2](#milestone-2) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/1qxhpcRfE8Q) ||
 | [MS3](#milestone-3) | V0.9 | [Watch the overview Session (March 23rd, 10AM)](https://youtu.be/Cfq2J7SwH5c) | The tester program will be released shortly|
 |  | V1.0 | |  Tester program added |
-| [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 23rd, 10AM)](https://youtu.be/0wX5qXroXKs) ||
+| [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
 
 
