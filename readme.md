@@ -1,7 +1,7 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
  - Milestone 4 (V1.0) released
-
+ 
 ## Use case
 
 When disaster hits a nation, the most urgent task is to be able to provide the people affected with what they need as quickly and as efficiently possible.
@@ -24,8 +24,9 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 | [MS1](#milestone-1) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/ZW09NrkUSzA) ||
 | [MS2](#milestone-2) | V1.0 | [Watch the Overview Session (March 7th, 10AM)](https://youtu.be/1qxhpcRfE8Q) ||
 | [MS3](#milestone-3) | V0.9 | [Watch the overview Session (March 23rd, 10AM)](https://youtu.be/Cfq2J7SwH5c) | The tester program will be released shortly|
-|  | V1.0 | |  Teseter program added |
-| [MS4](#milestone-4) | V1.0 | [Join the Overview (Monday March 28th at 10AM)](https://connect.rna2.blindsidenetworks.com/invite/to?c=7FcIZ_9pPFFEIZEqnhAj9_35yZOINbjvXOyA-Yf1B6g&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1648475608828&u=senecacollege) ||
+|  | V1.0 | |  Tester program added |
+| [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 23rd, 10AM)](https://youtu.be/0wX5qXroXKs) ||
+|  | V1.1 | |  Tester program updated to test rule of three |
 
 
 
@@ -1565,8 +1566,8 @@ A Perishable object is created using the default constructor that creates an emp
 ### Rule of three
 Implement the rule of three so a Perishable Item can be copied or assigned to another perishable item.
 
-### Query
-Create a constant query that returns a constant reference of the expiry date.
+### Query 
+Create a constant query called `expiry` that returns a constant reference of the expiry date.
 
 ### Virtual overrides
 #### readSKU override
@@ -1654,11 +1655,12 @@ Handling Instructions: Keep away from direct sunlight
 Final project Milestone 4
 Module: Perishable
 Filename: main.cpp
-Version 1.0
+Version 1.1
 Author: Fardad Soleimanloo   2022-03-27
 Revision History
 -----------------------------------------------------------
 Date          Reason
+22-03-28      Added Rule of three tester
 -----------------------------------------------------------*/
 #include <iostream>
 #include <fstream>
@@ -1668,12 +1670,13 @@ using namespace std;
 using namespace sdds;
 void resetToOriginal();
 void entryAndSave();
-void descriptive();
+void fileAndRuleOf3();
+void display(Perishable P);
+void displayLinear(Perishable p);
 int main() {
    resetToOriginal();
    entryAndSave();
-   cout << "------------------------" << endl;
-   descriptive();
+   fileAndRuleOf3();
    return 0;
 }
 void resetToOriginal() {
@@ -1726,15 +1729,33 @@ void entryAndSave() {
    file.close();
    delete p;
 }
-void descriptive() {
+void fileAndRuleOf3() {
    ifstream file("data.dat");
    Perishable p;
+   Perishable last;
+   cout << "--------------------------------------------------------------------------------" << endl;
    while (p.load(file)) {
-      cout << p << endl;
-      cout << "----------------------------------\nExpiry date: " << p.expiry() << "\n----------------------------------\n";
+      displayLinear(last);
+      display(p);
+      last = p;
+   }
+   displayLinear(last);
+}
+void display(Perishable p) {
+   if (p) {
+      cout << p
+         << "----------------------------------\nJust expiry date: "
+         << p.expiry() << endl;
    }
 }
-
+void displayLinear(Perishable p) {
+   if (p) {
+      cout << "linear: ------------------------------------------------------------------------" << endl;
+      p.linear(true);
+      cout << p << endl;
+      cout << "--------------------------------------------------------------------------------" << endl;
+   }
+}
 ```
 ### Tester output
 ```text
@@ -1800,7 +1821,7 @@ Handling Instructions: Keep in room temperature
 
 ------------------------
 22222 | Advil                               |    3 |   33 |   33.33 |*2022/12/12
-------------------------
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 12113: Hydrogen peroxide 100ml bottles
 Quantity Needed: 300
@@ -1809,10 +1830,11 @@ Unit Price: $3.99
 Needed Purchase Fund: $99.75
 Expiry date: 2023/11/11
 Handling Instructions: Keep away from direct sunlight
-
 ----------------------------------
-Expiry date: 2023/11/11
-----------------------------------
+Just expiry date: 2023/11/11
+linear: ------------------------------------------------------------------------
+12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 12345: Baby Formula
 Quantity Needed: 200
@@ -1820,10 +1842,11 @@ Quantity Available: 140
 Unit Price: $33.99
 Needed Purchase Fund: $2039.40
 Expiry date: 2022/12/12
-
 ----------------------------------
-Expiry date: 2022/12/12
-----------------------------------
+Just expiry date: 2022/12/12
+linear: ------------------------------------------------------------------------
+12345 | Baby Formula                        |  140 |  200 |   33.99 | 2022/12/12
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 12345: TYLENOL Extra Strength For Fast Pain Relief (100 tablets bottle)
 Quantity Needed: 200
@@ -1831,10 +1854,11 @@ Quantity Available: 40
 Unit Price: $11.99
 Needed Purchase Fund: $1918.40
 Expiry date: 2024/10/22
-
 ----------------------------------
-Expiry date: 2024/10/22
-----------------------------------
+Just expiry date: 2024/10/22
+linear: ------------------------------------------------------------------------
+12345 | TYLENOL Extra Strength For Fast Pai |   40 |  200 |   11.99 | 2024/10/22
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 11223: Enfamil A+
 Quantity Needed: 38
@@ -1843,10 +1867,11 @@ Unit Price: $38.99
 Needed Purchase Fund: $1364.65
 Expiry date: 2022/11/11
 Handling Instructions: Keep in a dry and cool place
-
 ----------------------------------
-Expiry date: 2022/11/11
-----------------------------------
+Just expiry date: 2022/11/11
+linear: ------------------------------------------------------------------------
+11223 | Enfamil A+                          |    3 |   38 |   38.99 |*2022/11/11
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 11111: Advil Extra Strength Caplets
 Quantity Needed: 22
@@ -1854,10 +1879,11 @@ Quantity Available: 2
 Unit Price: $22.22
 Needed Purchase Fund: $444.40
 Expiry date: 2022/12/12
-
 ----------------------------------
-Expiry date: 2022/12/12
-----------------------------------
+Just expiry date: 2022/12/12
+linear: ------------------------------------------------------------------------
+11111 | Advil Extra Strength Caplets        |    2 |   22 |   22.22 | 2022/12/12
+--------------------------------------------------------------------------------
 Perishable AMA Item:
 22222: Advil
 Quantity Needed: 33
@@ -1866,10 +1892,12 @@ Unit Price: $33.33
 Needed Purchase Fund: $999.90
 Expiry date: 2022/12/12
 Handling Instructions: Keep in room temperature
+----------------------------------
+Just expiry date: 2022/12/12
+linear: ------------------------------------------------------------------------
+22222 | Advil                               |    3 |   33 |   33.33 |*2022/12/12
+--------------------------------------------------------------------------------
 
-----------------------------------
-Expiry date: 2022/12/12
-----------------------------------
 ```
 ### Files to submit
 ```text

@@ -2,11 +2,12 @@
 Final project Milestone 4
 Module: Perishable
 Filename: main.cpp
-Version 1.0
+Version 1.1
 Author: Fardad Soleimanloo   2022-03-27
 Revision History
 -----------------------------------------------------------
 Date          Reason
+22-03-28      Added Rule of three tester
 -----------------------------------------------------------*/
 #include <iostream>
 #include <fstream>
@@ -16,12 +17,13 @@ using namespace std;
 using namespace sdds;
 void resetToOriginal();
 void entryAndSave();
-void descriptive();
+void fileAndRuleOf3();
+void display(Perishable P);
+void displayLinear(Perishable p);
 int main() {
    resetToOriginal();
    entryAndSave();
-   cout << "------------------------" << endl;
-   descriptive();
+   fileAndRuleOf3();
    return 0;
 }
 void resetToOriginal() {
@@ -74,11 +76,30 @@ void entryAndSave() {
    file.close();
    delete p;
 }
-void descriptive() {
+void fileAndRuleOf3() {
    ifstream file("data.dat");
    Perishable p;
+   Perishable last;
+   cout << "--------------------------------------------------------------------------------" << endl;
    while (p.load(file)) {
+      displayLinear(last);
+      display(p);
+      last = p;
+   }
+   displayLinear(last);
+}
+void display(Perishable p) {
+   if (p) {
+      cout << p
+         << "----------------------------------\nJust expiry date: "
+         << p.expiry() << endl;
+   }
+}
+void displayLinear(Perishable p) {
+   if (p) {
+      cout << "linear: ------------------------------------------------------------------------" << endl;
+      p.linear(true);
       cout << p << endl;
-      cout << "----------------------------------\nExpiry date: " << p.expiry() << "\n----------------------------------\n";
+      cout << "--------------------------------------------------------------------------------" << endl;
    }
 }
