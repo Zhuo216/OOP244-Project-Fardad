@@ -1,6 +1,7 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - Milestone 4 (V1.0) released
+ - Milestone 51, 52 and 53 (v0.5)<br/>
+   Submissions will not open until all the parts are posted.
  
 ## Use case
 
@@ -27,6 +28,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
+| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 10AM)]() ||
 
 
 
@@ -54,9 +56,9 @@ This project will be done in 5 milestones and each milestone will have its due d
 
 |Milestone 5<br/> Divided into<br/>Six submission| Description | Comments |
 |:------|:---|-------|
-| m51  | Menu item 7 and 1  | Mandatory, this is needed for the rest<br /> of the options to be functional|
-| m52  | Menu item 2 | Optional with 10% penalty |
-| m53  | Menu item 3 | Optional with 10% penalty |
+| [m51](#milestone-51)  | [Menu item 7 and 1](#milestone-51)  | Mandatory, this is needed for the rest<br /> of the options to be functional|
+| [m52](#milestone-52)  | [Menu item 2](#milestone-52) | Optional with 10% penalty |
+| [m53](#milestone-53)  | [Menu item 3](#milestone-53) | Optional with 10% penalty |
 | m54  | Menu item 4 | Optional with 10% penalty |
 | m55  | Menu item 5 | Optional with 10% penalty |
 | m56  | Menu item 6 | Optional with 10% penalty |
@@ -1945,3 +1947,212 @@ and follow the instructions.
 ```
 
 ## [Back to milestones](#milestones)
+
+# Milestone 5
+
+For the last milestone of this project, complete the implementation of the **AidMan* module (done in milestone 5) and implement the functionalities of the main menu.
+
+To make the testing and submission of the project easier the submission of milestone 5 is broken down into 6 parts; (m51, m52, m53, m54, m55 and m56):
+
+## AidMan maximum number if items.
+have the following constant created for maximum number items in the system.
+```C++
+   const int sdds_max_num_items = 100;
+```
+We will call this value **SMNI** for short in this text.
+
+## AidMan additional attributes 
+Start by adding the following attributes to the AidMan class:
+- an array of **sdds_max_num_items** iProduct pointers (called **iPP** for short in this text)
+ -an integer to keep track of the number of iProduct objects pointed by the iProduct pointers. (called **NOiP** for short in this text)<br />Obviously this number can not grow more than 100. 
+
+>This application can only keep track of a maximum of **sdds_max_num_items** products at a time. If more products are being managed, they must be added to a separate data file.
+ 
+
+## Milestone 51
+To use the Aid Management application the first action should be selecting menu item 7 to select a data file to work with. If the data file already exists all the records of the data file will be loaded into the iProduct array. If the data file does not exist, then a new data file can be created.
+
+### Menu item 7 (New/Open Aid Database)
+Three private methods need to be implemented to complete menu item 7: 
+- a method for saving data records in file
+- a method to dallocate all the memory allocated by the class
+- a method to load all the records from the data file into the class.
+
+#### the save method
+- if the filename attribute is not null
+   - Creates an ofstream object using the filename (to write into) 
+   - then function goes through the **iPP** up to the number of **NOiP** and calls the save() of each iProduct to write them in the file.
+- if the filename attribute is null, this function does nothing.
+
+#### the deallocate method
+deletes all the dynamic memory allocated in **iPP** elements and the filename, and then sets **NOiP** to zero.
+
+#### the load method. (menu item 7)
+Loads data records from a data file and returns true if at least one record is loaded.
+
+- Saves all the already existing iProducts
+- Deallocates all the resources of the AidMan class making it ready to load new information.
+- opens m_filename for reading in an **ifstream**
+- if opening the file was not successful
+  - prints: `Failed to open FN for reading!` (where FN is the file name
+  - prints: `Would you like to create a new data file?` and displays the following menu:
+  
+     ```text
+     1- Yes!
+     0- Exit
+     >
+     ```
+   
+     If the user selects yes, it will create an empty file under the same name and in any case, the function exits after.
+- if the file opening the file was successful, in a loop:
+   - peeks the first character of the record to determine if the record is a Perishable item or not. (using the first digit of the SKU)
+      - if the upcoming record is perishable it will create a new **Perishable** item in the next available **iPP** element.
+      - if the upcoming record is non-perishable it will create an **Item** in the next available **iPP**.
+      - if the next character is not recognized as a valid digit, the ifstream is set into an invalid state.
+   - if the allocation was a success (Item or Perishable) 
+      - calls the load method of the item to load the data from the file. 
+      - the loaded item is checked to be in a good state, if true, **NOiP** is added by one, if false the loaded item is deleted.
+
+## Menu Item 1 (List Items)
+Implement a list method for this menu selection (see the following instructions).
+
+When menu item 1 is selected call the [list](#int-listconst-char-sub_desc--nullptr) function and if any items are listed (list is not empty) print the following prompt:  
+```text
+Enter row number to display details or <ENTER> to continue:
+>
+```
+If the user presses enter, go back to the main menu otherwise display the selected item in a non-linear format.(The integer entry for the row number must be fool-proof.)
+
+### `int list(const char* sub_desc = nullptr);`
+- if sub_desc is null, print all the items in a linear format.
+- if sub_desc is not, null print only the items containing the sub_desc in their description.
+- list returns the number of iProducts printed (in the following example it will return 7)
+- if no items are listed, print `"The list is emtpy!"` and go to new line.
+
+Use the following format for your printout:
+```text
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 99999 | Description goes here               | 9999 | 9999 | 9999.99 |*2023/11/11
+   2 | 19999 | Description goes here               | 9999 | 9999 | 9999.99 |
+   3 | 99999 | Description goes here               | 9999 | 9999 | 9999.99 | 2023/11/11
+   4 | 29999 | Description goes here               | 9999 | 9999 | 9999.99 |
+   5 | 99999 | Description goes here               | 9999 | 9999 | 9999.99 |*2023/11/11
+   6 | 39999 | Description goes here               | 9999 | 9999 | 9999.99 |
+   7 | 99999 | Description goes here               | 9999 | 9999 | 9999.99 |*2023/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+```
+  
+### [Submission Instructions](#project-submission-ms5)
+
+## Milestone 52
+### `int search(int sku) const `
+Loops through all the **iPP** elements and if the SKU is a match it will return the index, otherwise it will return -1
+
+### Menu Item 2 (Add Item)
+
+- if the data file name is null, it will print: `"No data file is open!"`
+- if **NOiP** is not less than **SMNI**, it will print: `"Database full!"`
+- Otherwise, the following menu is displayed for the type of the iProduct to be added:
+
+```text
+1- Perishable
+2- Non-Perishable
+-----------------
+0- Exit
+>
+```
+
+- Based on the user's entry a Perishable or Non-Perishable Item is allocated in an iProduct pointer. If the user chooses to exit, the message `"Aborted\n"` is printed. 
+- If the user chooses not to exit the SKU of the item is read from the console and [searched](#int-searchint-sku-const) against already existing Items in the system.
+- If the SKU is found in the system the message: <br />`"Sku: 44444 is already in the system, try updating quantity instead.\n"` is printed and the allocated item is deleted.
+- If the SKU is not found, the rest of the data is read from the console. 
+- If the read iProduct is in a good state, it is added to the next available element of the **iPP** array and **NOiP** is added by one, otherwise, the allocated Item is displayed and then deleted.
+
+### [Submission Instructions](#project-submission-ms5)
+
+## Milestone 53
+### `void remove(int index)`
+- deletes the iProduct at index in **iPP**.
+- Then shifts all the iProducts to left once and reduces **NOiP** by one.
+
+[Illustration](images/remove.pdf)
+
+### Remove Item
+- Prompts the user: `"Item description: "`
+- Gets a Cstring for a description and [lists the items containing the description](#int-listconst-char-sub_desc--nullptr). 
+- If any item was found and listed it will ask for one of the SKU numbers listed to remove. (fool-proof using the prompt ` "Enter SKU: "`)
+- [Searches](#int-searchint-sku-const) for the SKU, if not found, it will print `"SKU not found!"`.
+- If SKU is found it will print the Item and the following confirmation message and menu:  
+
+   ```text
+   Following item will be removed:
+   ??? AMA Item:
+   99999: Description goes here
+   Quantity Needed: 999
+   Quantity Available: 999
+   Unit Price: $99.99
+   Needed Purchase Fund: $0.00
+   
+   Are you sure?
+   1- Yes!
+   0- Exit
+   >
+   ```
+   If the user selects yes, it will [remove](#remove-item) and prints `"Item removed!"`. Otherwise, it will exit the menu item printing: `"Aborted!"`
+
+
+
+## Project submission (MS5)
+
+> CURRENTLY COLSED
+
+### Files to submit
+```text
+AidMan.h
+AidMan.cpp
+Date.h
+Date.cpp
+iPorduct.h
+iPorduct.cpp
+Item.h
+Item.cpp
+Menu.h
+Menu.cpp
+Perishable.h
+Perishable.cpp
+Status.h
+Status.cpp
+Utils.h
+Utils.cpp
+main.cpp
+```
+
+Upload your source codes and the tester program to your `matrix` account. Compile and run your code using the `g++` compiler [as shown in the introduction](#compiling-and-testing-your-program) and make sure that everything works properly.
+
+Then, run the following command from your account (replace `profname.proflastname` with your professor’s Seneca userid):
+```
+~profname.proflastname/submit 2??/prj/m5X
+```
+and follow the instructions.
+
+- *2??* is replaced with your subject code
+- *X* is replaced with part number of milestone 5
+
+### The submitter program's options:
+```bash
+~prof_name.prof_lastname/submit DeliverableName [-submission options]<ENTER>
+[-submission option] acceptable values:
+  "-due":
+       Shows due dates only
+       This option cannot be used in combination with any other option.
+  "-skip_spaces":
+       Do the submission regardless of incorrect horizontal spacing.
+       This option may attract penalty.
+  "-skip_blank_lines":
+       Do the submission regardless of incorrect vertical spacing.
+       This option may attract penalty.
+  "-feedback":
+       Check the program execution without submission.
+```
+
