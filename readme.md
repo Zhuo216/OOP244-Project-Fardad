@@ -1,7 +1,6 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - Milestone 51, 52 and 53 (v0.5)<br/>
-   Submissions will not open until all the parts are posted.
+ - fool-proofing AinMan, main menu (V0.6)
  
 ## Use case
 
@@ -28,7 +27,8 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
-| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 10AM)]() ||
+| [MS5](#milestone-5) | V0.5| [Join the overview Session ( Monday April 4th, 10AM)]() ||
+|  | V0.6|  | [fool-proofing Main Menu](#the-main-menu) |
 
 
 
@@ -1966,7 +1966,37 @@ Start by adding the following attributes to the AidMan class:
 - an integer to keep track of the **number of iProduct Items** pointed by the iProduct pointers.<br />Obviously this number can not grow more than 100. 
 
 >This application can only keep track of a maximum of **sdds_max_num_items** products at a time. If more products are being managed, they must be added to a separate data file.
- 
+
+## The main menu
+Modify the run() function so if any menu option is selected before opening a data file, the selection is changed to 7 automatically.
+
+Insert the following logic after where the main menu selection is returned and before executing the user's selection.
+
+- after getting the selection for the menu. 
+- if the **filename** is null and the selection is not 7, change the selection to 7.
+
+Execution sample:
+
+```text
+Aid Management System Version 0.6
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****New/Open Aid Database****
+Enter file name:
+```
+> note that even though option 1 is selected since there is no data file, selection number 7 is executed. 
 
 ## Milestone 51
 To use the Aid Management application the first action should be selecting menu item 7 to select a data file to work with. If the data file already exists all the records of the data file will be loaded into the iProduct array. If the data file does not exist, then a new data file can be created.
