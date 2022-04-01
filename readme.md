@@ -1959,12 +1959,11 @@ have the following constant created for maximum number items in the system.
 ```C++
    const int sdds_max_num_items = 100;
 ```
-We will call this value **SMNI** for short in this text.
 
 ## AidMan additional attributes 
 Start by adding the following attributes to the AidMan class:
-- an array of **sdds_max_num_items** iProduct pointers (called **iPP** for short in this text)
- -an integer to keep track of the number of iProduct objects pointed by the iProduct pointers. (called **NOiP** for short in this text)<br />Obviously this number can not grow more than 100. 
+- an array of **sdds_max_num_items** **iProduct Pointers**
+- an integer to keep track of the **number of iProduct Items** pointed by the iProduct pointers.<br />Obviously this number can not grow more than 100. 
 
 >This application can only keep track of a maximum of **sdds_max_num_items** products at a time. If more products are being managed, they must be added to a separate data file.
  
@@ -1981,11 +1980,11 @@ Three private methods need to be implemented to complete menu item 7:
 #### the save method
 - if the filename attribute is not null
    - Creates an ofstream object using the filename (to write into) 
-   - then function goes through the **iPP** up to the number of **NOiP** and calls the save() of each iProduct to write them in the file.
+   - then function goes through the **iProduct Pointers** up to the number of **number of iProduct Items** and calls the save() of each iProduct to write them in the file.
 - if the filename attribute is null, this function does nothing.
 
 #### the deallocate method
-deletes all the dynamic memory allocated in **iPP** elements and the filename, and then sets **NOiP** to zero.
+deletes all the dynamic memory allocated in **iProduct Pointers** elements and the filename, and then sets **number of iProduct Items** to zero.
 
 #### the load method. (menu item 7)
 Loads data records from a data file and returns true if at least one record is loaded.
@@ -2006,12 +2005,12 @@ Loads data records from a data file and returns true if at least one record is l
      If the user selects yes, it will create an empty file under the same name and in any case, the function exits after.
 - if the file opening the file was successful, in a loop:
    - peeks the first character of the record to determine if the record is a Perishable item or not. (using the first digit of the SKU)
-      - if the upcoming record is perishable it will create a new **Perishable** item in the next available **iPP** element.
-      - if the upcoming record is non-perishable it will create an **Item** in the next available **iPP**.
+      - if the upcoming record is perishable it will create a new **Perishable** item in the next available **iProduct Pointers** element.
+      - if the upcoming record is non-perishable it will create an **Item** in the next available **iProduct Pointers**.
       - if the next character is not recognized as a valid digit, the ifstream is set into an invalid state.
    - if the allocation was a success (Item or Perishable) 
       - calls the load method of the item to load the data from the file. 
-      - the loaded item is checked to be in a good state, if true, **NOiP** is added by one, if false the loaded item is deleted.
+      - the loaded item is checked to be in a good state, if true, **number of iProduct Items** is added by one, if false the loaded item is deleted.
 
 ## Menu Item 1 (List Items)
 Implement a list method for this menu selection (see the following instructions).
@@ -2047,12 +2046,12 @@ Use the following format for your printout:
 
 ## Milestone 52
 ### `int search(int sku) const `
-Loops through all the **iPP** elements and if the SKU is a match it will return the index, otherwise it will return -1
+Loops through all the **iProduct Pointers** elements and if the SKU is a match it will return the index, otherwise it will return -1
 
 ### Menu Item 2 (Add Item)
 
 - if the data file name is null, it will print: `"No data file is open!"`
-- if **NOiP** is not less than **SMNI**, it will print: `"Database full!"`
+- if **number of iProduct Items** is not less than **sdds_max_num_items**, it will print: `"Database full!"`
 - Otherwise, the following menu is displayed for the type of the iProduct to be added:
 
 ```text
@@ -2067,14 +2066,14 @@ Loops through all the **iPP** elements and if the SKU is a match it will return 
 - If the user chooses not to exit the SKU of the item is read from the console and [searched](#int-searchint-sku-const) against already existing Items in the system.
 - If the SKU is found in the system the message: <br />`"Sku: 44444 is already in the system, try updating quantity instead.\n"` is printed and the allocated item is deleted.
 - If the SKU is not found, the rest of the data is read from the console. 
-- If the read iProduct is in a good state, it is added to the next available element of the **iPP** array and **NOiP** is added by one, otherwise, the allocated Item is displayed and then deleted.
+- If the read iProduct is in a good state, it is added to the next available element of the **iProduct Pointers** array and **number of iProduct Items** is added by one, otherwise, the allocated Item is displayed and then deleted.
 
 ### [Submission Instructions](#project-submission-ms5)
 
 ## Milestone 53
 ### `void remove(int index)`
-- deletes the iProduct at index in **iPP**.
-- Then shifts all the iProducts to left once and reduces **NOiP** by one.
+- deletes the iProduct at index in **iProduct Pointers**.
+- Then shifts all the iProducts to left once and reduces **number of iProduct Items** by one.
 
 [Illustration](images/remove.pdf)
 
