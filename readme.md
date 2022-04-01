@@ -1,6 +1,6 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - fool-proofing AinMan, main menu (V0.6)
+ - Milestone 54, 55 and 56 (v0.8)
  
 ## Use case
 
@@ -27,8 +27,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
-| [MS5](#milestone-5) | V0.5| [Join the overview Session ( Monday April 4th, 10AM)]() ||
-|  | V0.6|  | [fool-proofing Main Menu](#the-main-menu) |
+| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 10AM)]() ||
 
 
 
@@ -56,12 +55,12 @@ This project will be done in 5 milestones and each milestone will have its due d
 
 |Milestone 5<br/> Divided into<br/>Six submission| Description | Comments |
 |:------|:---|-------|
-| [m51](#milestone-51)  | [Menu item 7 and 1](#milestone-51)  | Mandatory, this is needed for the rest<br /> of the options to be functional|
-| [m52](#milestone-52)  | [Menu item 2](#milestone-52) | Optional with 10% penalty |
-| [m53](#milestone-53)  | [Menu item 3](#milestone-53) | Optional with 10% penalty |
-| m54  | Menu item 4 | Optional with 10% penalty |
-| m55  | Menu item 5 | Optional with 10% penalty |
-| m56  | Menu item 6 | Optional with 10% penalty |
+| [m51](#milestone-51) | [Menu item 7 and 1](#milestone-51)  | Mandatory, this is needed for the rest<br /> of the options to be functional|
+| [m52](#milestone-52) | [Menu item 2](#milestone-52) | Optional with 10% penalty |
+| [m53](#milestone-53) | [Menu item 3](#milestone-53) | Optional with 10% penalty |
+| [m54](#milestone-54) | [Menu item 4](#milestone-54) | Optional with 10% penalty |
+| [m55](#milestone-55) | [Menu item 5](#milestone-55) | Optional with 10% penalty |
+| [m56](#milestone-56) | [Menu item 6](#milestone-56) | Optional with 10% penalty |
 
 > The first 4 milestones will not be marked based on the code but on their output and their timely submissions. You may modify or debug your previous code as you are going through the milestones. The only milestone that is going to be scrutinized based on the code will be milestone 5. If you require any feedback on your first four milestones you need to ask your professor to do so.
 
@@ -1966,14 +1965,17 @@ Start by adding the following attributes to the AidMan class:
 - an integer to keep track of the **number of iProduct Items** pointed by the iProduct pointers.<br />Obviously this number can not grow more than 100. 
 
 >This application can only keep track of a maximum of **sdds_max_num_items** products at a time. If more products are being managed, they must be added to a separate data file.
+ 
 
-## The main menu
-Modify the run() function so if any menu option is selected before opening a data file, the selection is changed to 7 automatically.
+## AidMain::run() 
+
+### The main menu 
+Modify the run() function so if any menu is selected before opening a database, the selection is changed to 7 automatically.
 
 Insert the following logic after where the main menu selection is returned and before executing the user's selection.
 
 - after getting the selection for the menu. 
-- if the **filename** is null and the selection is not 7, change the selection to 7.
+- if selection is not zero and the **filename** is null and the selection is not 7, change the selection to 7.
 
 Execution sample:
 
@@ -1996,7 +1998,11 @@ Data file: No file
 ****New/Open Aid Database****
 Enter file name:
 ```
-> note that even though option 1 is selected since there is no data file, selection number 7 is executed. 
+> note that even though option 1 is selected since there is no data file, selection number 7 is executed.
+
+### saving at exit.
+
+When exiting the run() method, [save](#the-save-method)() the data file.
 
 ## Milestone 51
 To use the Aid Management application the first action should be selecting menu item 7 to select a data file to work with. If the data file already exists all the records of the data file will be loaded into the iProduct array. If the data file does not exist, then a new data file can be created.
@@ -2130,7 +2136,51 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
    ```
    If the user selects yes, it will [remove](#remove-item) and prints `"Item removed!"`. Otherwise, it will exit the menu item printing: `"Aborted!"`
 
+## Milestone 54
+### Update Quantity
+- Prompts `"Item description: "` and receives a sub-description from the user dynamically.
+- Lists all the iProducts containing the description; if no match is found, it prints `"No matches found!\n"`
+- After displaying all the matches it asks the user for the SKU of the iProduct that needs updating by prompting `"Enter SKU: "`
+- Then it will [search for the SKU](#int-searchint-sku-const) to find the index of the iProcuct in the **iProduct Pointers**. 
+- If a match is not found it will print `"SKU not found!\n"` and exits
+- After finding a match it will display a menu for adding or reducing the quantity:
+  ```text
+  1- Add
+  2- Reduce
+  0- Exit
+  >
+  ```
+  if the user selects exit it will print `"Aborted!\n"` and exit.
+- If add is selected a fool-proof quantity value is received from 1 up to the maximum amount needed to fulfill the needed quantity using the prompt: `"Quantity to add: "`. Then the quantity is increased by the entered amount.<br />
+After increasing quantity, a confirmation message is printed as follows:<br />`"X items added!"`, replacing X with the amount.
+- If reduce is selected a fool-proof quantity value is received from 1 up to the quantity on hand using the prompt: `"Quantity to add: "`. Then the quantity is reduced by the entered amount.<br />
+After reducing quantity a confirmation message is printed as follows:<br />`"X items removed!"`, replacing X with the amount.
 
+## Milestone 55
+### Sort
+Sorts the items in the **iProduct Pointers** array, based on difference between quantity needed and quantity on hand in descending order. When completed it will print `"Sort completed!\n"`
+
+
+## Milestone 56
+- Create an ofstream for shipping-order-file under the name `"shippingOrder.txt"`.
+- Print in the file: `"Shipping Order, Date: 9999/99/99\n"` (9999/99/99 is replaced by the current date)
+- Print the table titles as follows:  
+  ```text
+   ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+  -----+-------+-------------------------------------+------+------+---------+-----------
+  ```
+- In a loop go through all the **iProduct Pointers** elements and if the quantity needed and quantity on hand of the product is a match print it in the linear format into the file and remove it from the  **iProduct Pointers** array.
+- Count the number of printed (shipped) items
+- At end close the table by printing:  
+  ```text
+  -----+-------+-------------------------------------+------+------+---------+-----------
+  ```
+- end the process by printing the number of items shipped on the screen:<br />
+`""Shipping Order for 999 times saved!""` , 999 is replaced by the number of shipped (removed) items.
+
+# Milestone 5 Testers
+
+Under construction
 
 ## Project submission (MS5)
 
