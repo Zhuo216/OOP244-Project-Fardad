@@ -1,6 +1,6 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - Milestone 54, 55 and 56 (v0.8)
+ - All milestones and reflections (V0.9)
  
 ## Use case
 
@@ -2078,7 +2078,7 @@ Use the following format for your printout:
 -----+-------+-------------------------------------+------+------+---------+-----------
 ```
   
-### [Submission Instructions](#project-submission-ms5)
+### [Tester Programs ](#m51) - [Submission Instructions](#project-submission-ms5)
 
 ## Milestone 52
 ### `int search(int sku) const `
@@ -2104,7 +2104,7 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
 - If the SKU is not found, the rest of the data is read from the console. 
 - If the read iProduct is in a good state, it is added to the next available element of the **iProduct Pointers** array and **number of iProduct Items** is added by one, otherwise, the allocated Item is displayed and then deleted.
 
-### [Submission Instructions](#project-submission-ms5)
+### [Tester Programs ](#m52) - [Submission Instructions](#project-submission-ms5)
 
 ## Milestone 53
 ### `void remove(int index)`
@@ -2136,6 +2136,9 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
    ```
    If the user selects yes, it will [remove](#remove-item) and prints `"Item removed!"`. Otherwise, it will exit the menu item printing: `"Aborted!"`
 
+### [Tester Programs ](#m53) - [Submission Instructions](#project-submission-ms5)
+
+
 ## Milestone 54
 ### Update Quantity
 - Prompts `"Item description: "` and receives a sub-description from the user dynamically.
@@ -2155,10 +2158,16 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
 After increasing quantity, a confirmation message is printed as follows:<br />`"X items added!"`, replacing X with the amount.
 - If reduce is selected a fool-proof quantity value is received from 1 up to the quantity on hand using the prompt: `"Quantity to add: "`. Then the quantity is reduced by the entered amount.<br />
 After reducing quantity a confirmation message is printed as follows:<br />`"X items removed!"`, replacing X with the amount.
+- Selecting Add on an already fulfilled needed quantity should result in issuing the message: `"Quantity Needed already fulfilled!\n"`
+- Selecting Reduce on a zero quantity should result in issuing the message: `"Quaintity on hand is zero!\n"`
+
+### [Tester Programs ](#m54) - [Submission Instructions](#project-submission-ms5)
 
 ## Milestone 55
 ### Sort
 Sorts the items in the **iProduct Pointers** array, based on difference between quantity needed and quantity on hand in descending order. When completed it will print `"Sort completed!\n"`
+
+### [Tester Programs ](#m55) - [Submission Instructions](#project-submission-ms5)
 
 
 ## Milestone 56
@@ -2178,13 +2187,1138 @@ Sorts the items in the **iProduct Pointers** array, based on difference between 
 - end the process by printing the number of items shipped on the screen:<br />
 `""Shipping Order for 999 times saved!""` , 999 is replaced by the number of shipped (removed) items.
 
+
+### [Tester Programs ](#m56) - [Submission Instructions](#project-submission-ms5)
+
+
+# Reflection 
+
+Create a file call `reflect.txt`.
+
+Add all your citations (coding help received or coding help offered to other students)
+
+Write about your final solution for the **project** and the OOP244 subject overall, what you learned and mention any issues that caused you difficulty.
+
+[Reflection Submission](#refection-submission)
+
 # Milestone 5 Testers
 
-Under construction
+
+### M51
+
+[Back to Milestone 5-1](#milestone-51)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 51
+Filename: main.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data51.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+```
+#### Test Data
+```text
+1
+data.dat
+1
+<ENTER>
+1
+5
+0
+```
+#### Expected Output
+```text
+Script started on Sat 02 Apr 2022 10:51:47 AM EDT
+==50074== Memcheck, a memory error detector
+==50074== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==50074== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==50074== Command: ws
+==50074== 
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****New/Open Aid Database****
+Enter file name: data.dat
+6 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   2 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   3 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   4 | 44444 | Flash lights                        |  400 |  400 |   65.66 |
+   5 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   6 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   2 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   3 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   4 | 44444 | Flash lights                        |  400 |  400 |   65.66 |
+   5 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   6 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 5
+Perishable AMA Item:
+12345: Baby Formula
+Quantity Needed: 200
+Quantity Available: 145
+Unit Price: $33.99
+Needed Purchase Fund: $1869.45
+Expiry date: 2022/12/12
+
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+12113	Hydrogen peroxide 100ml bottles	275	300	3.99	Keep away from direct sunlight	231111
+45678	Sleeping Bags	100	200	65.66
+56789	Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows 	2000	2000	65.66
+44444	Flash lights	400	400	65.66
+12345	Baby Formula	145	200	33.99		221212
+11223	Enfamil A+	38	38	38.99	Keep in a dry and cool place	221111
+```
+
+
+### M52
+
+[Back to Milestone 5-2](#milestone-52)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 52
+Filename: main52.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data52.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+
+```
+#### Test Data
+```text
+2
+data.dat
+2
+1
+22222
+Rice
+200
+100
+16.99
+241010
+<ENTER>
+2
+2
+44444
+0
+```
+#### Expected Output
+```text
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 2
+
+****New/Open Aid Database****
+Enter file name: data.dat
+6 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 2
+
+****Add Item****
+1- Perishable
+2- Non-Perishable
+-----------------
+0- Exit
+> 1
+SKU: 22222
+AMA Item:
+SKU: 22222
+Description: Rice
+Quantity Needed: 200
+Quantity On Hand: 100
+Unit Price: $16.99
+Expiry date (YYMMDD): 241010
+Handling Instructions, ENTER to skip: 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 2
+
+****Add Item****
+1- Perishable
+2- Non-Perishable
+-----------------
+0- Exit
+> 2
+SKU: 44444
+Sku: 44444 is already in the system, try updating quantity instead.
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+12113	Hydrogen peroxide 100ml bottles	275	300	3.99	Keep away from direct sunlight	231111
+45678	Sleeping Bags	100	200	65.66
+56789	Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows 	2000	2000	65.66
+44444	Flash lights	400	400	65.66
+12345	Baby Formula	145	200	33.99		221212
+11223	Enfamil A+	38	38	38.99	Keep in a dry and cool place	221111
+22222	Rice	100	200	16.99		241010
+```
+
+### M53
+
+[Back to Milestone 5-3](#milestone-53)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 53
+Filename: main53.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data53.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+```
+#### Test Data
+```text
+3
+datat.dat
+3
+en
+12113
+1
+1
+<ENTER>
+0
+```
+#### Expected Output
+```text
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 3
+
+****New/Open Aid Database****
+Enter file name: data.dat
+7 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 3
+
+****Remove Item****
+Item description: en
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   3 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter SKU: 12113
+Following item will be removed: 
+Perishable AMA Item:
+12113: Hydrogen peroxide 100ml bottles
+Quantity Needed: 300
+Quantity Available: 275
+Unit Price: $3.99
+Needed Purchase Fund: $99.75
+Expiry date: 2023/11/11
+Handling Instructions: Keep away from direct sunlight
+
+Are you sure?
+1- Yes!
+0- Exit
+> 1
+Item removed!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   2 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   3 | 44444 | Flash lights                        |  400 |  400 |   65.66 |
+   4 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   5 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+   6 | 22222 | Rice                                |  120 |  300 |   16.99 | 2024/10/10
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+45678	Sleeping Bags	100	200	65.66
+56789	Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows 	2000	2000	65.66
+44444	Flash lights	400	400	65.66
+12345	Baby Formula	145	200	33.99		221212
+11223	Enfamil A+	38	38	38.99	Keep in a dry and cool place	221111
+22222	Rice 	120	300	16.99		241010
+
+```
+
+### M54
+
+[Back to Milestone 5-4](#milestone-54)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 54
+Filename: main54.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data54.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+```
+#### Test Data
+```text
+4
+data.dat
+4
+En
+11223
+0
+4
+En
+11223
+1
+4
+En
+11223
+2
+40
+38
+4
+En
+11223
+1
+40
+4
+1
+<ENTER>
+0
+```
+#### Expected Output
+```text
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 4
+
+****New/Open Aid Database****
+Enter file name: data.dat
+7 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 4
+
+****Update Quantity****
+Item description: En
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   6 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter SKU: 11223
+1- Add
+2- Reduce
+0- Exit
+> 0
+Aborted!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 4
+
+****Update Quantity****
+Item description: En
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   6 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter SKU: 11223
+1- Add
+2- Reduce
+0- Exit
+> 1
+Quantity Needed already fulfilled!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 4
+
+****Update Quantity****
+Item description: En
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   6 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter SKU: 11223
+1- Add
+2- Reduce
+0- Exit
+> 2
+Quantity to reduce: 40
+Value out of range [1<=val<=38]: 38
+38 items removed!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 4
+
+****Update Quantity****
+Item description: En
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   6 | 11223 | Enfamil A+                          |    0 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter SKU: 11223
+1- Add
+2- Reduce
+0- Exit
+> 1
+Quantity to add: 40
+Value out of range [1<=val<=38]: 4
+4 items added!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   2 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   3 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   4 | 44444 | Flash lights                        |  400 |  400 |   65.66 |
+   5 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   6 | 11223 | Enfamil A+                          |    4 |   38 |   38.99 |*2022/11/11
+   7 | 22222 | Rice                                |  120 |  300 |   16.99 | 2024/10/10
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+12113	Hydrogen peroxide 100ml bottles	275	300	3.99	Keep away from direct sunlight	231111
+45678	Sleeping Bags	100	200	65.66
+56789	Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows 	2000	2000	65.66
+44444	Flash lights	400	400	65.66
+12345	Baby Formula	145	200	33.99		221212
+11223	Enfamil A+	4	38	38.99	Keep in a dry and cool place	221111
+22222	Rice 	120	300	16.99		241010
+```
+
+### M55
+
+[Back to Milestone 5-5](#milestone-55)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 55
+Filename: main55.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data55.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+
+```
+#### Test Data
+```text
+1
+data.dat
+1
+<ENTER>
+5
+1
+<ENTER>
+0
+```
+#### Expected Output
+```text
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****New/Open Aid Database****
+Enter file name: data.dat
+6 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   2 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   3 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   4 | 44444 | Flash lights                        |  399 |  400 |   65.66 |
+   5 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   6 | 11223 | Enfamil A+                          |   30 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 5
+
+****Sort****
+Sort completed!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   2 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+   3 | 12113 | Hydrogen peroxide 100ml bottles     |  275 |  300 |    3.99 |*2023/11/11
+   4 | 11223 | Enfamil A+                          |   30 |   38 |   38.99 |*2022/11/11
+   5 | 44444 | Flash lights                        |  399 |  400 |   65.66 |
+   6 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+45678	Sleeping Bags	100	200	65.66
+12345	Baby Formula	145	200	33.99		221212
+12113	Hydrogen peroxide 100ml bottles	275	300	3.99	Keep away from direct sunlight	231111
+11223	Enfamil A+	30	38	38.99	Keep in a dry and cool place	221111
+44444	Flash lights	399	400	65.66
+56789	Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows Tents and Blankets and pillows 	2000	2000	65.66
+```
+
+### M56
+
+[Back to Milestone 5-6](#milestone-56)
+
+#### Tester program
+```C++
+/* ------------------------------------------------------
+Final project Milestone 56
+Filename: main56.cpp
+Version 1.0
+Author: Fardad Soleimanloo   2022-04-01
+Revision History
+-----------------------------------------------------------
+Date          Reason
+-----------------------------------------------------------*/
+#include <iostream>
+#include <fstream>
+#include "AidMan.h"
+#include "Utils.h"
+using namespace sdds;
+using namespace std;
+
+void copyfile(const char* to, const char* from);
+void displayFile(const char* file);
+
+int main() {
+   copyfile("data.dat", "data56.dat");
+   ut.testMode();
+   AidMan().run();
+   displayFile("data.dat");
+   cout << endl << "------------------------------------------------" << endl;
+   displayFile("shippingOrder.txt");
+   return 0;
+}
+
+void displayFile(const char* file) {
+   ifstream in(file);
+   char ch;
+   cout << "File: " << file << endl;
+   while (in.get(ch)) cout << ch;
+}
+
+void copyfile(const char* to, const char* from) {
+   std::ifstream in(from);
+   std::ofstream out(to);
+   char ch;
+   while (in.get(ch)) out.put(ch);
+}
+
+```
+#### Test Data
+```text
+7
+data.dat
+6
+1
+<ENTER>
+0
+```
+#### Expected Output
+```text
+Aid Management System
+Date: 2022/03/31
+Data file: No file
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 7
+
+****New/Open Aid Database****
+Enter file name: data.dat
+6 records loaded!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 6
+
+****Ship Items****
+Shipping Order for 3 times saved!
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 1
+
+****List Items****
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 45678 | Sleeping Bags                       |  100 |  200 |   65.66 |
+   2 | 44444 | Flash lights                        |  399 |  400 |   65.66 |
+   3 | 12345 | Baby Formula                        |  145 |  200 |   33.99 | 2022/12/12
+-----+-------+-------------------------------------+------+------+---------+-----------
+Enter row number to display details or <ENTER> to continue:
+> 
+
+Aid Management System
+Date: 2022/03/31
+Data file: data.dat
+---------------------------------
+1- List Items
+2- Add Item
+3- Remove Item
+4- Update Quantity
+5- Sort
+6- Ship Items
+7- New/Open Aid Database
+---------------------------------
+0- Exit
+> 0
+Exiting Program!
+File: data.dat
+45678	Sleeping Bags	100	200	65.66
+44444	Flash lights	399	400	65.66
+12345	Baby Formula	145	200	33.99		221212
+
+------------------------------------------------
+File: shippingOrder.txt
+Shipping Order, Date: 2022/03/31
+ ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry
+-----+-------+-------------------------------------+------+------+---------+-----------
+   1 | 12113 | Hydrogen peroxide 100ml bottles     |  300 |  300 |    3.99 |*2023/11/11
+   2 | 56789 | Tents and Blankets and pillows Tent | 2000 | 2000 |   65.66 |
+   3 | 11223 | Enfamil A+                          |   38 |   38 |   38.99 |*2022/11/11
+-----+-------+-------------------------------------+------+------+---------+-----------
+```
+
+
 
 ## Project submission (MS5)
 
-> CURRENTLY COLSED
+> CURRENTLY CLOSED
 
 ### Files to submit
 ```text
@@ -2205,7 +3339,10 @@ Status.cpp
 Utils.h
 Utils.cpp
 main.cpp
+reflect.txt (reflection submission only)
 ```
+
+
 
 Upload your source codes and the tester program to your `matrix` account. Compile and run your code using the `g++` compiler [as shown in the introduction](#compiling-and-testing-your-program) and make sure that everything works properly.
 
@@ -2217,6 +3354,16 @@ and follow the instructions.
 
 - *2??* is replaced with your subject code
 - *X* is replaced with part number of milestone 5
+
+### Refection submission
+
+To submit you reflection on the project and the semester overall, please upload `reflect.txt` to matrix.
+
+Then, run the following command from your account (replace `profname.proflastname` with your professor’s Seneca userid):
+```
+~profname.proflastname/submit 2??/prj/ref
+```
+and follow the instructions.
 
 ### The submitter program's options:
 ```bash
