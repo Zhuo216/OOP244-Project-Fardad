@@ -1,6 +1,7 @@
 # Project: Disaster and Emergency Aid Management 
 ## Current project state
- - All milestones and reflections (V0.9)
+ - All milestones and reflection instructions released (V0.9)
+ - Overview session moved to 11:45 on Monday Apr 4th
  
 ## Use case
 
@@ -27,7 +28,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
-| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 10AM)]() ||
+| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 11:45AM)](#milestones) | Link activates at 11:45|
 
 
 
@@ -3317,8 +3318,6 @@ Shipping Order, Date: 2022/03/31
 
 
 ## Project submission (MS5)
-
-> CURRENTLY CLOSED
 
 ### Files to submit
 ```text
