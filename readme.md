@@ -28,7 +28,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
-| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 11:45AM)](#milestones) | Link activates at 11:45|
+| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 11:45AM)](https://connect.rna2.blindsidenetworks.com/invite/to?c=toaHFMRmpzdCqKLvPArNeOJRivwuxW_gY4sC6efR4T0&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1649086174775&u=senecacollege) | Link activates at 11:45|
 
 
 
