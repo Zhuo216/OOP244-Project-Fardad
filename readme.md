@@ -28,7 +28,7 @@ Overview and Q&A sessions will be held on the dates and times shown below. this 
 |  | V1.0 | |  Tester program added |
 | [MS4](#milestone-4) | V1.0 | [Watch the overview Session ( March 28th, 10AM)](https://youtu.be/0wX5qXroXKs) ||
 |  | V1.1 | |  Tester program updated to test rule of three |
-| [MS5](#milestone-5) | V1.0 | [Join the overview Session ( Monday April 4th, 11:45AM)](https://connect.rna2.blindsidenetworks.com/invite/to?c=toaHFMRmpzdCqKLvPArNeOJRivwuxW_gY4sC6efR4T0&m=1b675d8dc1c952fe3b081555fabab0cc0a9cf35f&t=1649086174775&u=senecacollege) | Link activates at 11:45|
+| [MS5](#milestone-5) | V1.0 | [Watch the overview Session (April 4th, 11:45AM)](https://youtu.be/viWTgok3vNg) | |
 
 
 
@@ -2030,7 +2030,7 @@ Loads data records from a data file and returns true if at least one record is l
 - Deallocates all the resources of the AidMan class making it ready to load new information.
 - opens m_filename for reading in an **ifstream**
 - if opening the file was not successful
-  - prints: `Failed to open FN for reading!` (where FN is the file name
+  - prints: `Failed to open FN for reading!` (where FN is the file name)
   - prints: `Would you like to create a new data file?` and displays the following menu:
   
      ```text
@@ -2087,7 +2087,6 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
 
 ### Menu Item 2 (Add Item)
 
-- if the data file name is null, it will print: `"No data file is open!"`
 - if **number of iProduct Items** is not less than **sdds_max_num_items**, it will print: `"Database full!"`
 - Otherwise, the following menu is displayed for the type of the iProduct to be added:
 
@@ -2101,7 +2100,7 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
 
 - Based on the user's entry a Perishable or Non-Perishable Item is allocated in an iProduct pointer. If the user chooses to exit, the message `"Aborted\n"` is printed. 
 - If the user chooses not to exit the SKU of the item is read from the console and [searched](#int-searchint-sku-const) against already existing Items in the system.
-- If the SKU is found in the system the message: <br />`"Sku: 44444 is already in the system, try updating quantity instead.\n"` is printed and the allocated item is deleted.
+- If the SKU is found in the system the message: <br />`"Sku: 99999 is already in the system, try updating quantity instead.\n"` (99999 is replaced with the sku number) is printed and the allocated item is deleted.
 - If the SKU is not found, the rest of the data is read from the console. 
 - If the read iProduct is in a good state, it is added to the next available element of the **iProduct Pointers** array and **number of iProduct Items** is added by one, otherwise, the allocated Item is displayed and then deleted.
 
@@ -2157,7 +2156,7 @@ Loops through all the **iProduct Pointers** elements and if the SKU is a match i
   if the user selects exit it will print `"Aborted!\n"` and exit.
 - If add is selected a fool-proof quantity value is received from 1 up to the maximum amount needed to fulfill the needed quantity using the prompt: `"Quantity to add: "`. Then the quantity is increased by the entered amount.<br />
 After increasing quantity, a confirmation message is printed as follows:<br />`"X items added!"`, replacing X with the amount.
-- If reduce is selected a fool-proof quantity value is received from 1 up to the quantity on hand using the prompt: `"Quantity to add: "`. Then the quantity is reduced by the entered amount.<br />
+- If reduce is selected a fool-proof quantity value is received from 1 up to the quantity on hand using the prompt: `"Quantity to Reduce: "`. Then the quantity is reduced by the entered amount.<br />
 After reducing quantity a confirmation message is printed as follows:<br />`"X items removed!"`, replacing X with the amount.
 - Selecting Add on an already fulfilled needed quantity should result in issuing the message: `"Quantity Needed already fulfilled!\n"`
 - Selecting Reduce on a zero quantity should result in issuing the message: `"Quaintity on hand is zero!\n"`
@@ -2172,6 +2171,9 @@ Sorts the items in the **iProduct Pointers** array, based on difference between 
 
 
 ## Milestone 56
+
+### Ship Items
+
 - Create an ofstream for shipping-order-file under the name `"shippingOrder.txt"`.
 - Print in the file: `"Shipping Order, Date: 9999/99/99\n"` (9999/99/99 is replaced by the current date)
 - Print the table titles as follows:  
@@ -2595,7 +2597,7 @@ void copyfile(const char* to, const char* from) {
 #### Test Data
 ```text
 3
-datat.dat
+data.dat
 3
 en
 12113
